@@ -9,7 +9,7 @@ descobertas** no `context/`.
 
 ## Quando ela roda
 
-- **Automaticamente** no passo 6 do comando `/testar`.
+- **Automaticamente** no passo 6 do comando `/testar-cenarios`.
 - **Sob demanda**: peça "analise o resultado dos testes" ou digite `/qa-engineer` depois de qualquer
   `python -m robot -A tests/robot.args ...`.
 
@@ -50,7 +50,7 @@ descobertas** no `context/`.
 
 - **Pode alterar:** apenas `context/descobertas/*.md` e `context/cenarios/**/*.md`.
 - **Não altera:** testes, páginas, keywords, configuração e relatórios. Correções de automação são
-  recomendadas; quem aplica é o agente no `/testar` (ou você).
+  recomendadas; quem aplica é o agente no `/testar-cenarios` (ou você).
 
 ## Saída do script (resumo do JSON)
 

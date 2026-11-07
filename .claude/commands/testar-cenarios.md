@@ -3,7 +3,7 @@ description: Interpreta cenários (texto livre ou arquivos em context/cenarios/)
 argument-hint: <cenários em texto livre | caminho(s) de context/cenarios/>
 ---
 
-# /testar
+# /testar-cenarios
 
 Entrada do usuário:
 
@@ -21,7 +21,7 @@ Siga **todas** as etapas na ordem, respeitando as regras do `CLAUDE.md`.
 - Salve cenários novos em `context/cenarios/<funcionalidade>/<id-curto>.md` (`context/cenarios/_modelo.md`).
 
 ## 2. Carregar contexto
-Leia `context/app/*`, `context/regras-negocio/*`, `context/descobertas/*` , `tests/resources/*.resource` e `tests/pages/*.resource`.
+Leia `context/app/*`, `context/regras-negocio/*`, `context/descobertas/*`, `tests/resources/*.resource` e `tests/pages/*.resource`.
 Confira se o cenário bate com algum item de `context/descobertas/limitacoes-conhecidas.md` (ex.: senha não
 validada, crash ao abrir o 2º produto do catálogo). Se bater, avise antes de executar que o resultado esperado
 provavelmente vai divergir.
