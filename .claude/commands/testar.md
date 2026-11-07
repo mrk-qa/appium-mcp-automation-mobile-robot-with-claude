@@ -15,13 +15,13 @@ Siga **todas** as etapas na ordem, respeitando as regras do `CLAUDE.md`.
 - Se a entrada for um caminho, leia os `.md` indicados. Se for texto livre, extraia os cenários dele.
 - Para cada cenário, identifique: ID (crie `<FUNC>-<NNN>` se faltar), pré-condições, dados, passos,
   **critérios verificáveis** e pontos de evidência (`📸`; na falta, uma evidência por critério).
-- Identifique a **funcionalidade** (`products`, `cart`, `buy`, ...). O login **não** é objeto de teste:
+- Identifique a **funcionalidade** (`produtos`, `carrinho`, `compra`, ...). O login **não** é objeto de teste:
   é o step de setup `Iniciar App Autenticado`, executado em todos os testes.
 - Critério ambíguo ou não verificável → pergunte antes de seguir.
 - Salve cenários novos em `context/cenarios/<funcionalidade>/<id-curto>.md` (`context/cenarios/_modelo.md`).
 
 ## 2. Carregar contexto
-Leia `context/app/*`, `context/regras-negocio/*`, `context/descobertas/*` e `tests/resources/**/*.resource`.
+Leia `context/app/*`, `context/regras-negocio/*`, `context/descobertas/*` , `tests/resources/*.resource` e `tests/pages/*.resource`.
 Confira se o cenário bate com algum item de `context/descobertas/limitacoes-conhecidas.md` (ex.: senha não
 validada, crash ao abrir o 2º produto do catálogo). Se bater, avise antes de executar que o resultado esperado
 provavelmente vai divergir.
