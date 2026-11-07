@@ -1,0 +1,14 @@
+{
+  "android": {
+    "platformName": "Android",
+    "appium:automationName": "UiAutomator2",
+    "appium:deviceName": "Android Emulator",
+    "appium:udid": "emulator-5554",
+    "appium:platformVersion": "15",
+    "appium:appPackage": "com.saucelabs.mydemoapp.android",
+    "appium:appActivity": "com.saucelabs.mydemoapp.android.view.activities.SplashActivity",
+    "appium:noReset": false,
+    "appium:newCommandTimeout": 300,
+    "appium:autoGrantPermissions": true
+  }
+}

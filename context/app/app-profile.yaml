@@ -1,0 +1,20 @@
+# Perfil do app: metadados de referência (documentação para o agente).
+# Não é lido pelo Robot: locators e mensagens ficam no *** Variables *** de tests/pages/<pagina>.resource.
+
+app:
+  name: "Sauce Labs My Demo App"
+  package: "com.saucelabs.mydemoapp.android"
+  launch_activity: "com.saucelabs.mydemoapp.android.view.activities.SplashActivity"
+  version: "2.3.0"
+  platform: "Android"
+  tested_device:
+    udid: "emulator-5554"
+    android_version: "15"
+    api_level: 35
+    locale: "en_US"
+
+automation:
+  framework: "Robot Framework + AppiumLibrary"
+  exploration_tool: "Appium MCP"
+  capabilities_file: "tests/config/capabilities.json"
+  id_prefix: "com.saucelabs.mydemoapp.android:id/"

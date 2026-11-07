@@ -1,0 +1,6 @@
+# Fins de linha normalizados (LF) no repositório, independentemente do SO de quem commita
+* text=auto eol=lf
+
+# Binários: nunca converter nem tentar diff de texto
+*.png binary
+*.apk binary

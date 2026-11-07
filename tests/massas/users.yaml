@@ -1,0 +1,27 @@
+# Massas de login usadas nos cenários.
+#
+# Cada chave de primeiro nível é o NOME DA MASSA, usado nos testes:
+#   Test Setup    Iniciar App Autenticado               → usa a massa "padrao"
+#   [Setup]       Iniciar App Autenticado    visual     → usa outra massa só naquele teste
+#
+# Para adicionar uma massa, copie um bloco e troque o nome, o usuário e a senha.
+# Campos: descricao (para que serve), usuario, senha (sempre entre aspas).
+#
+# ⚠️ Somente dados FICTÍCIOS ou PÚBLICOS do app de demonstração (exibidos na própria tela de login).
+#    Este arquivo é versionado: nunca coloque credenciais reais aqui.
+#    A senha é digitada com `Input Password` e não aparece no log do Robot.
+
+padrao:
+  descricao: Usuário padrão de demonstração; autentica e vai para Products (validado)
+  usuario: bod@example.com
+  senha: "10203040"
+
+visual:
+  descricao: Usuário de demonstração "visual" exibido na tela de login (ainda não usado em testes)
+  usuario: visual@example.com
+  senha: "10203040"
+
+bloqueado:
+  descricao: Usuário bloqueado; o login exibe "Sorry this user has been locked out." e não autentica
+  usuario: alice@example.com
+  senha: "10203040"

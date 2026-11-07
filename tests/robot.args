@@ -1,0 +1,18 @@
+# Argument file do Robot Framework (User Guide: "Argument files").
+# Execute sempre a pasta raiz das suítes e filtre com --suite / --include / --test,
+# para que a hierarquia seja a mesma em todas as execuções e o consolidado fique coerente:
+#   python -m robot -A tests/robot.args tests/robot
+#   python -m robot -A tests/robot.args --suite carrinho tests/robot
+#   python -m robot -A tests/robot.args --include carrinho tests/robot
+#
+# Resultado consolidado em tests/reports/ (o listener mescla cada execução com rebot --merge).
+--outputdir tests/reports
+--output .last-run.xml
+--log NONE
+--report NONE
+--name Mobile Tests
+--listener tests/libs/summary_listener.py
+# Testes com a tag defeito-conhecido que falharem viram SKIP (com o motivo); se passarem, ficam PASS.
+--skiponfailure defeito-conhecido
+--consolecolors off
+--consolewidth 100
