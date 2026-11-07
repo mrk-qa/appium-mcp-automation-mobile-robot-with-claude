@@ -1,6 +1,6 @@
 ---
 name: qa-engineer
-description: Avalia, como QA Engineer, o resultado da última execução Robot deste projeto (tests/reports/). Classifica cada falha (automação, divergência do app, ambiente, defeito conhecido), confere evidências e rastreabilidade com os cenários, emite um veredito e registra as descobertas em context/descobertas/ (comportamentos e limitações conhecidas) e em context/cenarios/. Use ao fim de toda execução de testes, no passo 6 do /run-scenarios, ou quando o usuário pedir para analisar ou validar o resultado dos testes.
+description: Avalia, como QA Engineer, o resultado da última execução Robot deste projeto (tests/reports/). Classifica cada falha (automação, divergência do app, ambiente, defeito conhecido), confere evidências e rastreabilidade com os cenários, emite um veredito e registra as descobertas em context/descobertas/ (comportamentos e limitações conhecidas) e em context/cenarios/. Use ao fim de toda execução de testes, no passo 6 do /testar, ou quando o usuário pedir para analisar ou validar o resultado dos testes.
 ---
 
 # QA Engineer — avaliação do resultado e registro das descobertas
@@ -119,7 +119,7 @@ Nada de adjetivos vagos ("às vezes", "parece") sem número ou evidência.
 **Cenário proposto** (novo arquivo seguindo `context/cenarios/_modelo.md`): use o próximo ID livre da
 funcionalidade, `- **Status:** proposto (não automatizado)` logo abaixo das tags, critérios verificáveis
 baseados no que a evidência mostrou e a referência da evidência que motivou a proposta. Não crie o teste
-`.robot`: isso é decisão do usuário via `/run-scenarios`.
+`.robot`: isso é decisão do usuário via `/testar`.
 
 ## 7. Formato da resposta
 

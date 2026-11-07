@@ -9,15 +9,15 @@ App de exemplo: **Sauce Labs My Demo App 2.3.0** (`com.saucelabs.mydemoapp.andro
 
 ## Como funciona
 
-![Fluxo do /run-scenarios: você descreve o cenário; o Claude interpreta, carrega o contexto, explora telas novas com o Appium MCP quando falta keyword, gera a suíte e executa o Robot Framework, que faz login com a massa, valida, captura evidências e consolida o relatório; o Claude analisa as falhas e reporta.](context/fluxo-run-scenarios.excalidraw.png)
+![Fluxo do /testar: você descreve o cenário; o Claude interpreta, carrega o contexto, explora telas novas com o Appium MCP quando falta keyword, gera a suíte e executa o Robot Framework, que faz login com a massa, valida, captura evidências e consolida o relatório; o Claude analisa as falhas e reporta.](context/fluxo-testar.excalidraw.png)
 
-O desenho tem uma raia por participante: você, o agente (`/run-scenarios`), o Appium MCP com o emulador, o
+O desenho tem uma raia por participante: você, o agente (`/testar`), o Appium MCP com o emulador, o
 Robot Framework e os arquivos do projeto. Ele segue os 7 passos do comando. As setas tracejadas são as únicas
 interações com você no meio do fluxo: uma pergunta quando o critério é ambíguo e um aviso quando o cenário
 esbarra numa limitação conhecida.
 
 **Para editar o desenho:** abra [excalidraw.com](https://excalidraw.com) e arraste o arquivo
-`context/fluxo-run-scenarios.excalidraw.png` para a tela (ou use a extensão Excalidraw do VS Code). O PNG
+`context/fluxo-testar.excalidraw.png` para a tela (ou use a extensão Excalidraw do VS Code). O PNG
 carrega a cena do Excalidraw embutida, então abre editável. Depois de editar, exporte de novo como PNG com
 **"Embed scene"** marcado e salve com o mesmo nome.
 
@@ -38,7 +38,7 @@ context/                              conhecimento do app e cenários (lido pela
     limitacoes-conhecidas.md          limitações e defeitos conhecidos do app
   cenarios/                           cenários em linguagem natural (mesmas pastas de tests/robot/)
     _modelo.md, produtos/, carrinho/, compra/
-  fluxo-run-scenarios.excalidraw.png  desenho do fluxo do /run-scenarios (PNG com a cena do Excalidraw)
+  fluxo-testar.excalidraw.png         desenho do fluxo do /testar (PNG com a cena do Excalidraw)
 tests/                                tudo que é executado ou gerado pelos testes
   config/
     capabilities.json                 capabilities Appium (MCP + Robot)
@@ -60,7 +60,7 @@ tests/                                tudo que é executado ou gerado pelos test
   robot.args                          argument file do Robot
   requirements.txt                    dependências Python (versões fixas)
 CLAUDE.md                             regras do agente (lido pelo Claude Code em toda sessão)
-.claude/commands/run-scenarios.md     comando /run-scenarios
+.claude/commands/testar.md            comando /testar
 .claude/skills/qa-engineer/           skill QA Engineer (SKILL.md, script de coleta e README)
 .claude/settings.json                 libera o servidor appium-mcp (compartilhado)
 .mcp.json                             registro do servidor Appium MCP no Claude Code (obrigatório)
@@ -69,9 +69,9 @@ CLAUDE.md                             regras do agente (lido pelo Claude Code em
 
 ## Agente: comando e skill
 
-| | `/run-scenarios` | Skill `qa-engineer` |
+| | `/testar` | Skill `qa-engineer` |
 |---|---|---|
-| **Arquivo** | `.claude/commands/run-scenarios.md` | `.claude/skills/qa-engineer/SKILL.md` ([guia](.claude/skills/qa-engineer/README.md)) |
+| **Arquivo** | `.claude/commands/testar.md` | `.claude/skills/qa-engineer/SKILL.md` ([guia](.claude/skills/qa-engineer/README.md)) |
 | **Para quê** | Transformar cenários em testes executados com evidência | Avaliar o resultado da execução e registrar as descobertas |
 | **Entrada** | Texto livre ou `context/cenarios/**/*.md` | `tests/reports/.last-run.xml` + screenshots |
 | **Faz** | Interpreta, carrega o contexto, explora telas novas com o Appium MCP, escreve páginas e suítes, executa o Robot, aciona a skill e reporta | Classifica falhas (ambiente, automação, timeout, divergência, defeito conhecido), confere evidências e rastreabilidade, emite o veredito |
@@ -116,8 +116,8 @@ Não há `.env`: as massas de login estão em `tests/massas/users.yaml` e o devi
 **Pela IA (fluxo principal):**
 
 ```
-/run-scenarios context/cenarios/carrinho/
-/run-scenarios Adicionar "Sauce Labs Backpack" ao carrinho e validar que o badge mostra 1
+/testar context/cenarios/carrinho/
+/testar Adicionar "Sauce Labs Backpack" ao carrinho e validar que o badge mostra 1
 ```
 
 **Execução direta das suítes** (Robot puro, a partir da raiz do repositório):
@@ -176,7 +176,7 @@ trocado a cada case.
 | Item | Por que é genérico |
 |---|---|
 | `CLAUDE.md` | Regras do agente; troque só o mapa de pastas de funcionalidade e os exemplos |
-| `.claude/commands/run-scenarios.md` | Fluxo de 7 passos, independente do app |
+| `.claude/commands/testar.md` | Fluxo de 7 passos, independente do app |
 | `.claude/skills/qa-engineer/` | Avaliação e registro de descobertas; ver "Como adaptar" no [guia](.claude/skills/qa-engineer/README.md) |
 | `tests/resources/infraestrutura.resource` | Sessão por teste, evidências, `${TIMEOUT}`, leitura com retentativa |
 | `tests/libs/` | Variable file (capabilities + massas) e listener do relatório consolidado |
@@ -189,11 +189,11 @@ trocado a cada case.
 1. `tests/config/capabilities.json`: `appPackage`, `appActivity`, `udid`, `platformVersion` (o Robot e o MCP leem daqui).
 2. `tests/apk/`: o binário do novo app e o link de download no README.
 3. `tests/massas/users.yaml`: as massas de login do novo app (apenas dados fictícios).
-4. `tests/pages/`: apague as páginas do My Demo App; o `/run-scenarios` cria as novas ao explorar as telas.
+4. `tests/pages/`: apague as páginas do My Demo App; o `/testar` cria as novas ao explorar as telas.
 5. `tests/resources/suite.resource`: liste as novas páginas e reescreva `Iniciar App Autenticado` com o login do novo app.
 6. `context/app/`, `context/descobertas/`: recomece `navegacao.md`, `app-profile.yaml` e os dois arquivos de descobertas (mantenha os cabeçalhos).
 7. `context/cenarios/<func>/` e `tests/robot/<func>/`: apague os do My Demo App e escreva os novos cenários.
-8. Apague `tests/reports/` e rode `/run-scenarios context/cenarios/<func>/`.
+8. Apague `tests/reports/` e rode `/testar context/cenarios/<func>/`.
 
 Para um app mais lento, ajuste só o `${TIMEOUT}` (`--variable TIMEOUT:60s`). Para outra plataforma (iOS),
 troque o `automationName` e os locators; as regras, a skill e o relatório continuam valendo.

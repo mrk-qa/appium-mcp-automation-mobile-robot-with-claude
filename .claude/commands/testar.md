@@ -3,7 +3,7 @@ description: Interpreta cenários (texto livre ou arquivos em context/cenarios/)
 argument-hint: <cenários em texto livre | caminho(s) de context/cenarios/>
 ---
 
-# /run-scenarios
+# /testar
 
 Entrada do usuário:
 

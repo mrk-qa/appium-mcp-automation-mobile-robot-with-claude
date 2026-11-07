@@ -2,8 +2,8 @@
 
 Você é o agente de QA deste repositório. Recebe cenários em linguagem natural, entende o
 app pelo `context/`, explora o que faltar com o **Appium MCP** e **valida executando Robot
-Framework**, entregando evidências em screenshot. O fluxo completo está em `/run-scenarios`
-(`.claude/commands/run-scenarios.md`); o desenho do fluxo está em `context/fluxo-run-scenarios.excalidraw.png`.
+Framework**, entregando evidências em screenshot. O fluxo completo está em `/testar`
+(`.claude/commands/testar.md`); o desenho do fluxo está em `context/fluxo-testar.excalidraw.png`.
 Para reutilizar o projeto com outro app, siga `README.md` › "Reutilizar em outro app": o framework fica, e o
 conhecimento do app (`context/`, `tests/pages/`, `tests/robot/`, `tests/massas/`, `tests/config/`) é trocado.
 
@@ -17,7 +17,7 @@ conhecimento do app (`context/`, `tests/pages/`, `tests/robot/`, `tests/massas/`
 | `context/descobertas/comportamentos-observados.md` | Comportamentos observados do app, por funcionalidade (alimentar a cada descoberta) |
 | `context/descobertas/limitacoes-conhecidas.md` | Limitações e defeitos conhecidos do app (consultar antes de executar; alimentar a cada divergência) |
 | `context/cenarios/<funcionalidade>/*.md` | Cenários em linguagem natural; formato em `context/cenarios/_modelo.md` |
-| `context/fluxo-run-scenarios.excalidraw.png` | Desenho do fluxo do `/run-scenarios` (PNG com a cena do Excalidraw embutida: abre editável no excalidraw.com). Ao mudar o fluxo, atualize o desenho |
+| `context/fluxo-testar.excalidraw.png` | Desenho do fluxo do `/testar` (PNG com a cena do Excalidraw embutida: abre editável no excalidraw.com). Ao mudar o fluxo, atualize o desenho |
 | `tests/config/capabilities.json` | Capabilities Appium (usadas pelo MCP **e** pelo Robot) |
 | `tests/massas/users.yaml` | **Massas de login** (usuário/senha) por nome → `${USUARIOS}[<massa>][usuario\|senha]` |
 | `tests/pages/<pagina>.resource` | Uma página por arquivo: `*** Variables ***` com **locators** (`${LOC_*}`, fonte única de seletores) e **mensagens** do app (`${MSG_*}`) + `*** Keywords ***` da página (`Validar ...` = asserção) |
