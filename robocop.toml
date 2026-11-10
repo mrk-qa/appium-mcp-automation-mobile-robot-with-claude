@@ -1,0 +1,14 @@
+# Robocop (lint e formatação da comunidade Robot Framework), versão fixa em tests/requirements.txt.
+# Rodado pelo .claude/scripts/lint_robot.py (revisor-robot e hook pós-edição) ou direto:
+#   python -m robocop check tests
+#
+# Regras desligadas e por quê:
+#   LEN04/LEN06  teste longo/muitas keywords: os testes são fluxos ponta a ponta com uma keyword por passo do cenário
+#   LEN08/LEN32  linha/nome de variável longos: locators xpath/UiSelector e ${LOC_<TELA>_<ELEMENTO>} são longos por natureza
+#   DOC01        keyword sem [Documentation]: o nome em português no imperativo já descreve a ação
+#   MISC04       sinal de atribuição "inconsistente": o projeto usa VAR (sem "=") junto de ${x}= de propósito
+[tool.robocop.lint]
+ignore = ["LEN04", "LEN06", "LEN08", "LEN32", "DOC01", "MISC04"]
+
+[tool.robocop.format]
+line_length = 300

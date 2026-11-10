@@ -3,6 +3,7 @@
 - **ID:** CART-003
 - **Tags:** carrinho, remover-item
 - **Suíte:** carrinho (`tests/robot/carrinho/carrinho.robot`)
+- **Regras:** RN-CART-05
 
 ## Objetivo
 Garantir que remover o único item esvazia o carrinho.

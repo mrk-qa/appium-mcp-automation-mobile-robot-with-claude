@@ -3,6 +3,7 @@
 - **ID:** BUY-001
 - **Tags:** compra, compra-de-um-item
 - **Suíte:** compra (`tests/robot/compra/compra.robot`)
+- **Regras:** RN-BUY-01, RN-BUY-02, RN-BUY-03, RN-BUY-04, RN-BUY-05
 
 ## Objetivo
 Garantir que a compra de um produto é concluída com sucesso.

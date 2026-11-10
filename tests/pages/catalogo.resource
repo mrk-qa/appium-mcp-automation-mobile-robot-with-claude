@@ -50,7 +50,7 @@ Validar Preços Em Ordem Crescente
 Conferir Preços Em Ordem Crescente
     [Documentation]    Uma tentativa: compara os preços visíveis na ordem em que aparecem (ao menos 2).
     @{elementos}=    Get Webelements    ${LOC_PRODUCT_ITEM_ALL_PRICES}
-    ${textos}=    Create List
+    VAR    @{textos}    @{EMPTY}
     FOR    ${elemento}    IN    @{elementos}
         ${texto}=    Get Text    ${elemento}
         Append To List    ${textos}    ${texto}

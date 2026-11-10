@@ -4,6 +4,7 @@
 - **Tags:** carrinho, carrinho-vazio
 - **Status:** automatizado em 2026-11-07 (`tests/robot/carrinho/carrinho.robot`)
 - **Suíte:** carrinho (`tests/robot/carrinho/carrinho.robot`)
+- **Regras:** RN-CART-01, RN-CART-06
 
 ## Objetivo
 Garantir que o carrinho sem itens orienta o usuário a voltar a comprar.

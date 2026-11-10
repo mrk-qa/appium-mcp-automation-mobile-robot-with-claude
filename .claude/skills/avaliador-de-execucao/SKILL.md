@@ -1,13 +1,14 @@
 ---
-name: qa-engineer
-description: Avalia, como QA Engineer, o resultado da última execução Robot deste projeto (tests/reports/). Classifica cada falha (automação, divergência do app, ambiente, defeito conhecido), confere evidências e rastreabilidade com os cenários, emite um veredito e registra as descobertas em context/descobertas/ (comportamentos e limitações conhecidas) e em context/cenarios/. Use ao fim de toda execução de testes, no passo 6 do /testar-cenarios, ou quando o usuário pedir para analisar ou validar o resultado dos testes.
+name: avaliador-de-execucao
+description: Avalia o resultado da última execução Robot deste projeto (tests/reports/). Classifica cada falha (automação, divergência do app, ambiente, defeito conhecido), confere evidências e rastreabilidade com os cenários, emite um veredito e registra as descobertas em context/descobertas/ (comportamentos e limitações conhecidas) e em context/cenarios/. Use ao fim de toda execução de testes, no passo 7 do /testar-cenarios, ou quando o usuário pedir para analisar ou validar o resultado dos testes.
 ---
 
-# QA Engineer — avaliação do resultado e registro das descobertas
+# Avaliador de Execução — avaliação do resultado e registro das descobertas
 
-Você é o QA Engineer que assina o resultado. Responda em português.
+Você é o Avaliador de Execução que assina o resultado. Responda em português.
 
-**O que você pode alterar:** somente `context/descobertas/*.md` e `context/cenarios/**/*.md` (passo 6).
+**O que você pode alterar:** somente `context/descobertas/*.md`, `context/cenarios/**/*.md` (passo 6) e o `- **Status:**`
+de uma regra em `context/regras-negocio/<func>.md` (`divergente` quando houver defeito novo; o texto da regra é do `product-owner`).
 **O que você não altera:** testes (`tests/robot/`), páginas e keywords (`tests/pages/`, `tests/resources/`),
 configuração e relatórios. Correções de automação são **recomendadas**, não aplicadas.
 
@@ -16,7 +17,7 @@ configuração e relatórios. Correções de automação são **recomendadas**, 
 Na raiz do repositório, rode:
 
 ```bash
-python .claude/skills/qa-engineer/scripts/coletar_resultados.py
+python .claude/skills/avaliador-de-execucao/scripts/coletar_resultados.py
 ```
 
 O script lê `tests/reports/.last-run.xml` (a **última execução**, não o consolidado) e devolve, por teste:
@@ -79,6 +80,7 @@ ambiente como comportamento do app.
 | Defeito já registrado que se repetiu | Atualizar a entrada existente: contagem e data da última reprodução |
 | Defeito registrado que não se reproduziu (teste passou) | Acrescentar "Não reproduzido em <data> (<ID>)"; mover para "Resolvidos" só após nova confirmação |
 | Cenário afetado por limitação/defeito | Seção "Observações da execução" no `.md` do cenário |
+| Divergência que contraria uma regra de negócio | `- **Status:** divergente` na regra (`context/regras-negocio/<func>.md`), citando o defeito |
 | Comportamento sem cenário que o cubra | Novo cenário **proposto** em `context/cenarios/<func>/` |
 
 Antes de escrever, procure a entrada existente (mesmo título, mesma tela, mesmo sintoma) e **atualize-a em vez
@@ -118,7 +120,8 @@ Nada de adjetivos vagos ("às vezes", "parece") sem número ou evidência.
 
 **Cenário proposto** (novo arquivo seguindo `context/cenarios/_modelo.md`): use o próximo ID livre da
 funcionalidade, `- **Status:** proposto (não automatizado)` logo abaixo das tags, critérios verificáveis
-baseados no que a evidência mostrou e a referência da evidência que motivou a proposta. Não crie o teste
+baseados no que a evidência mostrou, `- **Regras:**` com as RN cobertas (regra nova: peça ao `product-owner`) e a
+referência da evidência que motivou a proposta. O arquivo precisa passar em `python .claude/scripts/validar_cenarios.py --arquivo <arquivo>`. Não crie o teste
 `.robot`: isso é decisão do usuário via `/testar-cenarios`.
 
 ## 7. Formato da resposta

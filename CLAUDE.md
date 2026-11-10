@@ -2,8 +2,11 @@
 
 Você é o agente de QA deste repositório. Recebe cenários em linguagem natural, entende o
 app pelo `context/`, explora o que faltar com o **Appium MCP** e **valida executando Robot
-Framework**, entregando evidências em screenshot. O fluxo completo está em `/testar-cenarios`
-(`.claude/commands/testar-cenarios.md`); o desenho do fluxo está em `context/fluxo-testar-cenarios.excalidraw.png`.
+Framework**, entregando evidências em screenshot. Quatro personas garantem a qualidade de ponta a ponta:
+`product-owner` (regras e cenário pronto), `analista-de-testes` (cobertura), `revisor-robot` (revisão do código
+antes de executar) e `avaliador-de-execucao` (avaliação do resultado); hooks em `.claude/settings.json` reforçam as
+regras invioláveis. O fluxo completo está em `/testar-cenarios` (`.claude/commands/testar-cenarios.md`); o desenho
+do fluxo está em `context/fluxo-testar-cenarios.excalidraw.png`.
 Para reutilizar o projeto com outro app, siga `README.md` › "Reutilizar em outro app": o framework fica, e o
 conhecimento do app (`context/`, `tests/pages/`, `tests/robot/`, `tests/massas/`, `tests/config/`) é trocado.
 
@@ -14,6 +17,7 @@ conhecimento do app (`context/`, `tests/pages/`, `tests/robot/`, `tests/massas/`
 | `context/app/app-profile.yaml` | Metadados de referência do app (documentação; não é lido pelo Robot) |
 | `context/app/navegacao.md` | Mapa de telas, transições validadas e acesso ao login |
 | `context/regras-negocio/conduta-testes.md` | Regras de conduta e convenções do teste (obrigatórias) |
+| `context/regras-negocio/<funcionalidade>.md` | **Regras de negócio do app** (`RN-<PREFIXO>-NN`, com fonte e status), mantidas pela skill `product-owner`; os cenários as citam em `- **Regras:**` |
 | `context/descobertas/comportamentos-observados.md` | Comportamentos observados do app, por funcionalidade (alimentar a cada descoberta) |
 | `context/descobertas/limitacoes-conhecidas.md` | Limitações e defeitos conhecidos do app (consultar antes de executar; alimentar a cada divergência) |
 | `context/cenarios/<funcionalidade>/*.md` | Cenários em linguagem natural; formato em `context/cenarios/_modelo.md` |
@@ -30,7 +34,13 @@ conhecimento do app (`context/`, `tests/pages/`, `tests/robot/`, `tests/massas/`
 | `tests/robot.args` | Argument file do Robot (listener, saída, `--skiponfailure defeito-conhecido`) |
 | `tests/reports/` | **Relatório consolidado** (não versionado): `log.html`, `report.html`, `output.xml`, `summary.md`, `screenshots/<ID>/` |
 | `tests/apk/` | APK do app (não versionado) |
-| `.claude/skills/qa-engineer/` | Skill **QA Engineer**: avalia o resultado da execução (veredito, classificação de falhas, cobertura de evidências) e registra as descobertas em `context/descobertas/` e `context/cenarios/` |
+| `.claude/skills/product-owner/` | Skill **Product Owner**: regras de negócio e cenários até a Definition of Ready |
+| `.claude/skills/analista-de-testes/` | Skill **Analista de Testes**: matriz regra × cenário × teste, lacunas e cenários propostos |
+| `.claude/agents/revisor-robot.md` | Subagente **Revisor Robot** (Desenvolvedor/SDET): revisão independente dos `.robot`/`.resource` antes de executar; só ele grava a aprovação |
+| `.claude/scripts/lint_robot.py` · `validar_cenarios.py` | Validações determinísticas: convenções Robot + Robocop + dry-run; estrutura de cenários e regras |
+| `.claude/hooks/` | Hooks (registrados em `.claude/settings.json`): `proteger_senhas` (regra 4), `validar_apos_edicao` (lint a cada edição), `portao_execucao` (Robot só com revisão aprovada) |
+| `robocop.toml` | Configuração do Robocop (regras desligadas e o motivo) |
+| `.claude/skills/avaliador-de-execucao/` | Skill **Avaliador de Execução**: avalia o resultado da execução (veredito, classificação de falhas, cobertura de evidências) e registra as descobertas em `context/descobertas/` e `context/cenarios/` |
 | `.mcp.json` · `.claude/settings.json` | Registro e liberação do servidor Appium MCP (compartilhados). `.claude/settings.local.json` é pessoal e não é versionado |
 
 ## Regras invioláveis
@@ -54,6 +64,12 @@ conhecimento do app (`context/`, `tests/pages/`, `tests/robot/`, `tests/massas/`
 8. **Cenário e teste andam juntos:** todo teste tem `[Documentation]    Cenário: context/cenarios/<func>/<arquivo>.md`.
    Ao mudar dados, passos ou critérios, atualize o `.md` e o `.robot` na mesma alteração.
 9. Pergunte ao usuário quando um critério esperado for ambíguo ou não verificável.
+10. **Portões do fluxo:** cenário só vai para o Robot com a Definition of Ready da skill `product-owner`
+    (critérios verificáveis, `- **Regras:**` com RN existentes e vigentes); suíte só executa com **APROVADO** do
+    subagente `revisor-robot`. Nunca rode `lint_robot.py --aprovar` fora do revisor, e nunca contorne um hook:
+    se ele bloquear, corrija a causa.
+11. **Regra de negócio não se inventa:** toda RN tem fonte (evidência, documentação ou decisão do usuário); sem fonte,
+    `Status: a confirmar` e pergunte. Divergência do app não muda o texto da regra: muda o status para `divergente`.
 
 ## Comandos
 
@@ -63,6 +79,10 @@ python -m robot -A tests/robot.args --suite carrinho tests/robot        # uma fu
 python -m robot -A tests/robot.args --test "BUY-001*" tests/robot       # um teste
 python -m robot -A tests/robot.args --include remover-item tests/robot  # por tag (objetivo)
 python -m robot -A tests/robot.args --variable TIMEOUT:60s tests/robot  # app mais lento
+
+python .claude/scripts/lint_robot.py                                     # lint: convenções + Robocop + dry-run
+python .claude/scripts/validar_cenarios.py                               # DoR estrutural de cenários e regras
+python .claude/skills/analista-de-testes/scripts/matriz_cobertura.py     # matriz regra × cenário × teste
 ```
 
 **Pré-requisito:** emulador online e servidor Appium rodando em `127.0.0.1:4723` (`appium`). Sem eles, a abertura

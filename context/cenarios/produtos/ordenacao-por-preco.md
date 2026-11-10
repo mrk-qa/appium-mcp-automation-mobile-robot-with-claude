@@ -3,6 +3,7 @@
 - **ID:** PROD-003
 - **Tags:** produtos, ordenacao-por-preco
 - **Suíte:** produtos (`tests/robot/produtos/produtos.robot`)
+- **Regras:** RN-PROD-03
 
 ## Objetivo
 Garantir que a ordenação por preço crescente reordena o catálogo.

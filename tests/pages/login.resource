@@ -32,14 +32,14 @@ Validar Tela De Login
 Preencher Usuário
     [Arguments]    ${usuario}
     Clear Text    ${LOC_LOGIN_USERNAME}
-    Run Keyword If    $usuario    Input Text    ${LOC_LOGIN_USERNAME}    ${usuario}
+    IF    $usuario    Input Text    ${LOC_LOGIN_USERNAME}    ${usuario}
     Ocultar Teclado
 
 Preencher Senha
     [Documentation]    Usa Input Password: o valor não aparece no log.
     [Arguments]    ${senha}
     Clear Text    ${LOC_LOGIN_PASSWORD}
-    Run Keyword If    $senha    Input Password    ${LOC_LOGIN_PASSWORD}    ${senha}
+    IF    $senha    Input Password    ${LOC_LOGIN_PASSWORD}    ${senha}
     Ocultar Teclado
 
 Submeter Login

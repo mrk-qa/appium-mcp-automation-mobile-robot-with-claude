@@ -3,6 +3,7 @@
 - **ID:** PROD-001
 - **Tags:** produtos, listagem-de-produtos
 - **Suíte:** produtos (`tests/robot/produtos/produtos.robot`)
+- **Regras:** RN-PROD-01
 
 ## Objetivo
 Garantir que o catálogo lista os produtos com nome e preço corretos.
@@ -19,4 +20,4 @@ Garantir que o catálogo lista os produtos com nome e preço corretos.
 
 ## Resultado esperado (critérios verificáveis)
 - [ ] O título da tela é "Products".
-- [ ] Cada produto aparece com o preço esperado.
+- [ ] Cada produto aparece com o seu preço: Backpack "$ 29.99", Bike Light "$ 9.99" e Onesie "$ 7.99".

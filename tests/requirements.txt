@@ -1,3 +1,5 @@
 robotframework==7.5
 robotframework-appiumlibrary==3.2.1
 PyYAML==6.0.2
+# Lint das suítes (usado por .claude/scripts/lint_robot.py; regras em robocop.toml)
+robotframework-robocop==9.1.2

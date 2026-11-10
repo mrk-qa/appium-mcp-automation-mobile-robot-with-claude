@@ -7,9 +7,9 @@ Documentation     Recursos de execução: sessão Appium por teste e evidências
 ...                 retentativas; para outro app, rode com --variable TIMEOUT:<valor>;
 ...               - pasta de evidências: <outputdir>/screenshots/<ID do teste>/, preparada pelo listener
 ...                 (tests/libs/summary_listener.py, registrado em tests/robot.args).
-Library           AppiumLibrary    timeout=${TIMEOUT}    run_on_failure=No Operation
 Library           Collections
 Library           String
+Library           AppiumLibrary    timeout=${TIMEOUT}    run_on_failure=No Operation
 Variables         ../libs/app_context.py
 
 
@@ -39,7 +39,7 @@ Registrar Evidência
     ...                O caminho relativo é resolvido pelo AppiumLibrary a partir do --outputdir.
     [Arguments]    ${nome}
     ${anterior}=    Get Variable Value    ${EVIDENCIA_NUMERO}    ${0}
-    VAR    ${EVIDENCIA_NUMERO}    ${anterior + 1}    scope=TEST
+    VAR    ${EVIDENCIA_NUMERO}    ${anterior + 1}    scope=TEST    # robocop: off=VAR06  numeração das evidências precisa durar o teste inteiro
     Capture Page Screenshot    screenshots/${TEST NAME.split()[0]}/${{ str($EVIDENCIA_NUMERO).zfill(2) }}_${nome}.png
 
 Validar Texto Do Elemento

@@ -3,6 +3,7 @@
 - **ID:** CART-001
 - **Tags:** carrinho, adicionar-um-item
 - **Suíte:** carrinho (`tests/robot/carrinho/carrinho.robot`)
+- **Regras:** RN-CART-01, RN-CART-02, RN-CART-03, RN-CART-04
 
 ## Objetivo
 Garantir que um produto adicionado aparece no carrinho com os dados corretos.

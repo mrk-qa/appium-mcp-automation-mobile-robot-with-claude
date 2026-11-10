@@ -3,6 +3,7 @@
 - **ID:** CART-002
 - **Tags:** carrinho, adicionar-varios-itens
 - **Suíte:** carrinho (`tests/robot/carrinho/carrinho.robot`)
+- **Regras:** RN-CART-02, RN-CART-03, RN-CART-04
 
 ## Objetivo
 Garantir que vários produtos diferentes são somados no carrinho.
@@ -21,7 +22,7 @@ Garantir que vários produtos diferentes são somados no carrinho.
 
 ## Resultado esperado (critérios verificáveis)
 - [ ] O contador do carrinho mostra 2.                     📸 contador_carrinho
-- [ ] O carrinho lista os dois produtos com os preços corretos.
+- [ ] O carrinho lista "Sauce Labs Onesie" ($ 7.99) e "Sauce Labs Bike Light" ($ 9.99).
 - [ ] Totais: "2 Items" e "$ 17.98".                    📸 itens_no_carrinho
 
 ## Observações da execução

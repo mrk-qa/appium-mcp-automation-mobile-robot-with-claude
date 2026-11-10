@@ -3,6 +3,7 @@
 - **ID:** PROD-002
 - **Tags:** produtos, detalhes-do-produto
 - **Suíte:** produtos (`tests/robot/produtos/produtos.robot`)
+- **Regras:** RN-PROD-02
 
 ## Objetivo
 Garantir que a tela de detalhes mostra os dados do produto selecionado.

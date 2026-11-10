@@ -1,7 +1,7 @@
 """Coleta os fatos da última execução Robot para a avaliação de QA (somente leitura).
 
 Uso (na raiz do repositório):
-    python .claude/skills/qa-engineer/scripts/coletar_resultados.py
+    python .claude/skills/avaliador-de-execucao/scripts/coletar_resultados.py
 
 Saída: JSON com, por teste da última execução, status, mensagem, tags, duração, evidências
 geradas x planejadas, link do cenário e se ele existe; além de avisos (WARN), testes das suítes

@@ -20,6 +20,8 @@ tests/apk/*
 # --- Claude Code: preferências pessoais ---
 # O que é compartilhado fica em .claude/settings.json
 .claude/settings.local.json
+# Aprovação do revisor-robot (hash dos arquivos de automação), gravada por lint_robot.py --aprovar
+.claude/revisao-robot.local.json
 
 # --- Python ---
 __pycache__/

@@ -3,6 +3,7 @@
 - **ID:** BUY-002
 - **Tags:** compra, compra-de-varios-itens
 - **Suíte:** compra (`tests/robot/compra/compra.robot`)
+- **Regras:** RN-BUY-01, RN-BUY-03, RN-BUY-04, RN-BUY-05
 
 ## Objetivo
 Garantir que a compra de vários produtos é concluída com sucesso.

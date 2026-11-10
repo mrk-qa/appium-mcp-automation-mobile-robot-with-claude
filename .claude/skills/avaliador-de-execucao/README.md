@@ -1,6 +1,6 @@
-# Skill `qa-engineer`
+# Skill `avaliador-de-execucao`
 
-Skill do Claude Code que avalia, como um QA Engineer, o resultado da **última execução Robot** do projeto:
+Skill do Claude Code que avalia o resultado da **última execução Robot** do projeto:
 classifica cada falha, confere evidências e rastreabilidade, emite um **veredito** e **registra as
 descobertas** no `context/`.
 
@@ -9,8 +9,8 @@ descobertas** no `context/`.
 
 ## Quando ela roda
 
-- **Automaticamente** no passo 6 do comando `/testar-cenarios`.
-- **Sob demanda**: peça "analise o resultado dos testes" ou digite `/qa-engineer` depois de qualquer
+- **Automaticamente** no passo 7 do comando `/testar-cenarios`.
+- **Sob demanda**: peça "analise o resultado dos testes" ou digite `/avaliador-de-execucao` depois de qualquer
   `python -m robot -A tests/robot.args ...`.
 
 ## Arquivos
@@ -23,7 +23,7 @@ descobertas** no `context/`.
 
 ## O que ela faz, passo a passo
 
-1. **Coleta os fatos**: `python .claude/skills/qa-engineer/scripts/coletar_resultados.py`, na raiz.
+1. **Coleta os fatos**: `python .claude/skills/avaliador-de-execucao/scripts/coletar_resultados.py`, na raiz.
    Lê `tests/reports/.last-run.xml` (a última execução, não o consolidado) e devolve, por teste: status,
    mensagem, tags, duração, evidências geradas × planejadas (contando os `Registrar Evidência` do `.robot`),
    presença do screenshot `falha` e o cenário `.md` ligado pelo `[Documentation]`. Lista também avisos,
@@ -48,7 +48,7 @@ descobertas** no `context/`.
 
 ## Permissões
 
-- **Pode alterar:** apenas `context/descobertas/*.md` e `context/cenarios/**/*.md`.
+- **Pode alterar:** apenas `context/descobertas/*.md`, `context/cenarios/**/*.md` e o status das regras em `context/regras-negocio/`.
 - **Não altera:** testes, páginas, keywords, configuração e relatórios. Correções de automação são
   recomendadas; quem aplica é o agente no `/testar-cenarios` (ou você).
 
